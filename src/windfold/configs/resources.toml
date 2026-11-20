@@ -1,0 +1,17 @@
+data_dir = "data"
+runs_dir = "runs"
+reserved_threads = 2
+cores_per_cpu_job = 4
+gpu_workers_per_device = 2
+automl_jobs_per_device = 2
+cpu_jobs_on_second_threads = false
+gpu_workers_keep_whole_cores = false
+status_interval_seconds = 300
+stall_minutes = 20
+replan_seconds = 120
+failure_fraction = 0.02
+failures_before_pause = 3
+memory_margin = 1.25
+reserved_memory_gb = 8
+load_rows = 1000000
+load_features = 12

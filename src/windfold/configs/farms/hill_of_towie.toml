@@ -1,0 +1,208 @@
+name = "hill_of_towie"
+reader = "hill_of_towie"
+turbine_type = "siemens_swt_2_3_82"
+
+[dataset]
+doi = "10.5281/zenodo.22662930"
+concept_doi = "10.5281/zenodo.14870021"
+version = "2.1.0"
+licence = "CC-BY-4.0"
+citation = "RES on behalf of TRIG (2026) Hill of Towie open dataset, version 2.1.0. Zenodo"
+
+[windows]
+calibration = { start = 2023-06-01T00:00:00Z, end = 2023-09-01T00:00:00Z }
+development = { start = 2023-09-01T00:00:00Z, end = 2025-10-28T13:00:00Z, reason = "dynamic-yaw testing with wake steering starts at the end" }
+
+[histories]
+starts = [2023-09-01T00:00:00Z, 2023-12-01T00:00:00Z, 2024-03-01T00:00:00Z, 2024-06-01T00:00:00Z]
+test = { start = 2025-06-08T00:00:00Z, end = 2025-10-28T13:00:00Z }
+
+[northing]
+farm_rotation = "wake_dips"
+
+[[northing.provider_corrections]]
+file = "companion/HOT_DY_Design_northing.yaml"
+start = 2019-10-14T23:50:00Z
+
+[source]
+archives = "20*.zip"
+turbines = "Hill_of_Towie_turbine_metadata.csv"
+event_files = ["Hill_of_Towie_ShutdownDuration.zip"]
+
+[channels]
+power_kw = "tblSCTurGrid.wtc_ActPower_mean"
+speed = "tblSCTurbine.wtc_PrWindSp_mean"
+speed_std = "tblSCTurbine.wtc_PrWindSp_stddev"
+wind_direction = "tblSCTurbine.wtc_ActualWindDirection_mean"
+nacelle_position = "tblSCTurbine.wtc_NacelPos_mean"
+ambient_temperature = "tblSCTurTemp.wtc_AmbieTmp_mean"
+state_code_min = "tblSCTurbine.wtc_WTOperSt_min"
+state_code_max = "tblSCTurbine.wtc_WTOperSt_max"
+running_s = "tblSCTurFlag.wtc_ScInOper_timeon"
+turbine_error_s = "tblSCTurFlag.wtc_ScTurSto_timeon"
+environment_stop_s = "tblSCTurFlag.wtc_ScEnvSto_timeon"
+communication_stop_s = "tblSCTurFlag.wtc_ScComSto_timeon"
+grid_stop_s = "tblSCTurFlag.wtc_ScGrdSto_timeon"
+setpoint_end_kw = "tblSCTurbine.wtc_PowerRef_endvalue"
+wind_direction_min = "tblSCTurbine.wtc_ActualWindDirection_min"
+wind_direction_max = "tblSCTurbine.wtc_ActualWindDirection_max"
+nacelle_position_min = "tblSCTurbine.wtc_NacelPos_min"
+nacelle_position_max = "tblSCTurbine.wtc_NacelPos_max"
+speed_active = "tblSCTurbine.wtc_AcWindSp_mean"
+speed_secondary = "tblSCTurbine.wtc_SeWindSp_mean"
+
+[rules]
+causal_offsets = false
+fit_power_curve = true
+state_codes = ["state_code_min", "state_code_max"]
+running_seconds = "running_s"
+min_running_seconds = 599.0
+low_wind_states = ["1", "2", "3"]
+stop_seconds = ["turbine_error_s", "environment_stop_s", "communication_stop_s", "grid_stop_s"]
+setpoint_end = "setpoint_end_kw"
+linear_mean_angles = [["wind_direction", "wind_direction_min", "wind_direction_max"], ["nacelle_position", "nacelle_position_min", "nacelle_position_max"]]
+
+[rules.alarm_kinds]
+"1005" = "stop"
+"3130" = "stop"
+"8000" = "stop"
+"10105" = "stop"
+"102" = "icing"
+"8210" = "icing"
+"8230" = "icing"
+"8234" = "icing"
+"8235" = "icing"
+"8236" = "icing"
+
+[[exclusions]]
+start = 2023-07-01T00:00:00Z
+end = 2023-07-03T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2023-08-18T00:00:00Z
+end = 2023-08-19T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2023-09-24T00:00:00Z
+end = 2023-09-29T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2023-10-10T00:00:00Z
+end = 2023-10-12T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2024-01-28T00:00:00Z
+end = 2024-02-01T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2024-04-09T00:00:00Z
+end = 2024-04-13T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2024-06-28T00:00:00Z
+end = 2024-06-29T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2024-08-09T00:00:00Z
+end = 2024-09-28T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2025-05-26T00:00:00Z
+end = 2025-05-27T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+[[exclusions]]
+start = 2025-06-03T00:00:00Z
+end = 2025-06-05T00:00:00Z
+reason = "farm-wide curtailment, RES exclusion periods at the pinned companion commit"
+
+
+[[exclusions]]
+start = 2024-03-14T07:00:00Z
+end = 2024-03-14T18:00:00Z
+reason = "farm-wide pitch tune-up"
+
+[[raw_files]]
+name = "2023.zip"
+bytes = 1512000259
+md5 = "45eceb1855af89cf4dc215f2ab97eda1"
+
+[[raw_files]]
+name = "2024.zip"
+bytes = 1557682397
+md5 = "89783562792fd71fc7a8543faf93ab18"
+
+[[raw_files]]
+name = "2025.zip"
+bytes = 1596220683
+md5 = "d3cd7edb535a45ffca1c7028b397f035"
+
+[[raw_files]]
+name = "CHANGELOG.md"
+bytes = 2996
+md5 = "7f3e2e71bed47e52f71032d7b8fb83c0"
+
+[[raw_files]]
+name = "Hill_of_Towie_AeroUp_install_dates.csv"
+bytes = 629
+md5 = "6145283b4d93c00b7f614143f6f27972"
+
+[[raw_files]]
+name = "Hill_of_Towie_ShutdownDuration.zip"
+bytes = 19834579
+md5 = "089be3c24d6fa80f2d652f244b51e470"
+
+[[raw_files]]
+name = "Hill_of_Towie_alarms_description.csv"
+bytes = 428
+md5 = "65117a1d5740da6af2653147be471692"
+
+[[raw_files]]
+name = "Hill_of_Towie_data_dictionary.md"
+bytes = 14886
+md5 = "8b34bcd19813feda5e45834763d46c0b"
+
+[[raw_files]]
+name = "Hill_of_Towie_grid_fields_description.csv"
+bytes = 670
+md5 = "beb450d696fa4aca3572ccf35cf74d7b"
+
+[[raw_files]]
+name = "Hill_of_Towie_tables_description.csv"
+bytes = 846
+md5 = "e138e6caaec5aed652bc8eda727f322b"
+
+[[raw_files]]
+name = "Hill_of_Towie_turbine_fields_description.csv"
+bytes = 3532
+md5 = "d77de82c0b094f0788d4ed9b54ddfdfa"
+
+[[raw_files]]
+name = "Hill_of_Towie_turbine_metadata.csv"
+bytes = 2239
+md5 = "bb9673e7adb522b7e15a62f3e7ada6c8"
+
+[[raw_files]]
+name = "README.md"
+bytes = 5930
+md5 = "567004f1e3f81b3ad81f397272dc31b0"
+
+[[raw_files]]
+name = "companion/HOT_DY_Design_northing.yaml"
+url = "https://raw.githubusercontent.com/resgroup/hill-of-towie-open-source-analysis/03bb9ccee18b56b9c32595cbb7298a4244951769/scripts/wfc_analysis_2026/wind_up_config/northing_corrections/HOT_DY_Design_northing.yaml"
+bytes = 2039
+md5 = "cc3ad100f971a4b3b1ef20a7fe647fd9"
+
+[[raw_files]]
+name = "companion/optimized_northing_corrections.yaml"
+url = "https://raw.githubusercontent.com/resgroup/hill-of-towie-open-source-analysis/03bb9ccee18b56b9c32595cbb7298a4244951769/scripts/uplift_analysis_2025/wind_up_config/northing/optimized_northing_corrections.yaml"
+bytes = 2702
+md5 = "7582c3c23b59753ca40ca562c516bbbd"
