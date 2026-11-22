@@ -1,0 +1,303 @@
+hypotheses = ["validation_misleads", "wind_frame_transfers", "coverage_predicts_failure", "early_history_advantage"]
+
+[processing]
+speed_bin_edges_ms = [5.0, 6.5, 8.0, 10.0]
+direction_bucket_deg = 5.0
+steady_change_deg = 10.0
+steady_resultant = 0.95
+stuck_repeats = 3
+stopped_power_fraction = 0.01
+control_min_valid_minutes = 7
+control_washout_minutes = 20
+validity_distance_d = 30.0
+setpoint_binding_fraction = 0.98
+setpoint_tolerance_fraction = 0.05
+offset_window_days = 30
+direction_calibration = true
+max_speed_ms = 40.0
+max_power_fraction = 1.1
+frozen_min_speed_ms = 1.5
+curve_speed_tolerance = 0.1
+curve_power_tolerance = 0.05
+curve_bin_ms = 0.5
+curve_min_rows = 20
+consensus_min_others = 2
+speed_factor_min_timestamps = 1000
+min_temperature_c = -40.0
+max_temperature_c = 50.0
+offset_short_window_hours = 24.0
+offset_jump_deg = 10.0
+offset_min_rows = 72
+dip_distance_d = [2.0, 10.0]
+dip_speed_ms = [5.0, 10.0]
+dip_half_width_deg = 30.0
+dip_min_rows = 10
+dip_min_depth = 0.1
+min_valid_turbines = 2
+linear_mean_north_deg = 1.0
+linear_mean_distance_deg = 15.0
+
+[splits]
+random_folds = 5
+time_folds = 5
+time_buffer_days = 7
+arc_count = 12
+arc_width_deg = 30.0
+arc_buffer_deg = 5.0
+arc_min_rows = 300
+arc_min_days = 10
+control_tolerance = 0.05
+history_horizons_days = [7, 14, 30, 60, 91, 182, 365]
+history_gap_days = 7
+history_min_timestamps = 300
+tuning_validation_fraction = 0.2
+tuning_embargo_days = 7
+
+[statistics]
+block_days = 7
+replicates = 10000
+interval = 0.95
+alpha = 0.05
+min_finite = 0.95
+coverage_levels = [0.9, 0.99]
+turbulence_edges = [0.0, 0.10, 0.13, 0.16, 1.0]
+
+[monitoring]
+min_history_days = 30
+fit_fraction = 0.75
+calibrate_from_fraction = 0.8
+min_rows_per_day = 36
+min_calibration_days = 3
+min_monitorable_share = 0.5
+false_alarms_per_turbine_month = 1.0
+drops = [0.02, 0.05]
+copies = 50
+episode_days = 14
+censor_days = 14
+models = ["windfold", "cyclic_gam", "identity_gbm", "pywake", "direction_lookup"]
+lookup_min_rows = 20
+
+[decision]
+min_development_farms = 3
+min_confirmatory_datasets = 1
+exceedance_margin = 0.005
+noninferiority_margin = 0.02
+
+[seeds]
+study = 20261116
+model = [0, 1, 2]
+
+[smearing]
+min_rows_per_bin = 200
+
+[automl_budget]
+candidate_minutes = [6.0, 24.0]
+min_relative_gain = 0.02
+
+[automl]
+preset = "best_quality"
+hyperparameters = "zeroshot"
+models = ["GBM", "CAT", "XGB", "NN_TORCH", "FASTAI"]
+gpu_models = ["NN_TORCH", "FASTAI"]
+bag_folds = 8
+stack_levels = 1
+
+[physics]
+trials = 100
+power_floor_fraction = 0.01
+truncate_sd = 4.0
+kernel_family = "niayifar"
+
+[physics.search.jensen]
+k = [0.01, 0.15]
+spread_deg = [0.0, 10.0]
+
+[physics.search.niayifar]
+ti = [0.02, 0.3]
+spread_deg = [0.0, 10.0]
+
+[physics.search.turbopark]
+a = [0.01, 0.15]
+ti = [0.02, 0.3]
+spread_deg = [0.0, 10.0]
+
+[physics.defaults.jensen]
+k = 0.1
+spread_deg = 0.0
+
+[physics.defaults.niayifar]
+ti = 0.1
+spread_deg = 0.0
+
+[physics.defaults.turbopark]
+a = 0.04
+ti = 0.1
+spread_deg = 0.0
+
+[matched_monitoring]
+models = ["identity_gbm_inflow", "pywake_inflow", "windfold_constant_inflow"]
+
+[inflow]
+log2_ratio_low = -1.5
+log2_ratio_high = 1.5
+log2_ratio_step = 0.25
+climatology_sector_deg = 30.0
+diurnal_hours = 6
+
+[engine]
+starts = [1e-4, 1e-2, 1.0]
+noise_floor = 1e-6
+variance_floor = 1e-8
+variance_ceiling = 100.0
+offset_variance = 1.0
+physics_variance = 0.25
+harmonics_order = 4
+spline_knots = 24
+spline_ridge = 0.1
+lookup_window_deg = 5
+scales = "evidence"
+fixed_prior_variance = 0.04
+
+[kernel]
+along_max_d = 30.0
+across_max_d = 3.0
+along_first_knot_d = 1.5
+along_knots = 9
+across_first_knot_d = 0.45
+across_knots = 4
+degree = 3
+ridge = 0.1
+
+[coverage]
+noise_variance = 0.04
+kernel_variance = 0.04
+dissimilarity_sample = 2000
+
+[trial]
+toggle_minutes = 50
+durations_days = [30, 91, 182, 365, 730]
+replicates = 1000
+
+[sensitivities.no_direction_calibration]
+overrides = { "processing.direction_calibration" = false }
+changes_processing = true
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "pywake", "pywake_inflow", "pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.speed_4_to_12]
+overrides = { "processing.speed_bin_edges_ms" = [4.0, 6.5, 8.0, 12.0] }
+changes_processing = true
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "pywake", "pywake_inflow", "pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.arc_buffer_0deg]
+overrides = { "splits.arc_buffer_deg" = 0.0 }
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "pywake", "pywake_inflow", "pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow"]
+regimes = ["arc_single", "arc_opposite", "arc_control"]
+
+[sensitivities.arc_buffer_10deg]
+overrides = { "splits.arc_buffer_deg" = 10.0 }
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "pywake", "pywake_inflow", "pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow"]
+regimes = ["arc_single", "arc_opposite", "arc_control"]
+
+[sensitivities.arcs_60deg]
+overrides = { "splits.arc_width_deg" = 60.0, "splits.arc_count" = 6 }
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "pywake", "pywake_inflow", "pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow"]
+regimes = ["arc_single", "arc_opposite", "arc_control"]
+
+[sensitivities.block_days_1]
+overrides = { "statistics.block_days" = 1 }
+
+[sensitivities.block_days_14]
+overrides = { "statistics.block_days" = 14 }
+
+[sensitivities.hill_of_towie_after_tune_up]
+overrides = { "farms.hill_of_towie.windows.development.start" = 2024-03-14T17:00:00Z, "farms.hill_of_towie.histories.starts" = [2024-06-01T00:00:00Z] }
+changes_processing = true
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "pywake", "pywake_inflow", "pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.kernel_along_20d]
+overrides = { "kernel.along_max_d" = 20.0 }
+models = ["kernel_linear", "windfold"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.kernel_along_40d]
+overrides = { "kernel.along_max_d" = 40.0 }
+models = ["kernel_linear", "windfold"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.fixed_shrinkage]
+overrides = { "engine.scales" = "fixed" }
+models = ["power_curve", "cyclic_gam", "identity_linear", "kernel_linear", "pywake_discrepancy", "pywake_discrepancy_inflow"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.fixed_physics_scale]
+overrides = { "engine.physics_variance" = 1e-8 }
+models = ["pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.binned_kernel]
+overrides = { "kernel.degree" = 0 }
+models = ["kernel_linear", "windfold"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[sensitivities.kernel_across_2d]
+overrides = { "kernel.across_max_d" = 2.0 }
+models = ["kernel_linear", "windfold"]
+regimes = ["random", "time_blocked", "arc_single", "arc_opposite", "arc_control", "history", "threshold"]
+
+[endpoints.validation_misleads]
+physics = "pywake"
+baselines = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "identity_gbm", "geometry_gbm", "physics_guided_gbm", "absolute_graph", "wind_frame_graph", "peer_automl", "pywake", "pywake_discrepancy"]
+
+[endpoints.wind_frame_transfers]
+pairs = [["identity_linear", "kernel_linear"], ["identity_gbm", "geometry_gbm"], ["absolute_graph", "wind_frame_graph"]]
+
+[endpoints.coverage_predicts_failure]
+relational = "kernel_linear"
+physics = "pywake"
+covariates = ["wake_strength", "angular_distance", "training_rows", "dissimilarity"]
+min_class = 3
+confirmation_farms = ["kelmarsh", "hill_of_towie", "smarteole"]
+
+[endpoints.early_history_advantage]
+model = "windfold"
+horizon_days = 30
+accuracy_comparators = ["power_curve", "direction_lookup", "cyclic_gam", "identity_gbm"]
+monitor_comparators = ["cyclic_gam", "identity_gbm"]
+drop = 0.05
+
+[gbm]
+upstream_neighbours = 3
+rotor_points = 128
+
+[graph]
+steps_per_round = 100
+pretrain_rounds = 100
+
+[menus]
+size = 30
+
+[menus.gbm]
+num_boost_round = [500, 1000, 1500, 2000]
+learning_rate = { log = [0.01, 0.1] }
+num_leaves = [15, 31, 63, 127]
+min_data_in_leaf = [20, 50, 100, 200, 500]
+feature_fraction = { uniform = [0.5, 1.0] }
+bagging_fraction = { uniform = [0.5, 1.0] }
+bagging_freq = [1]
+lambda_l2 = { log = [0.001, 10.0] }
+min_data_per_group = [10, 50, 100, 200]
+cat_smooth = { log = [1.0, 100.0] }
+
+[menus.graph]
+width = [64]
+layers = [2, 3, 4, 8]
+gnn_dropout = { uniform = [0.0, 0.1] }
+encoder_dropout = { uniform = [0.0, 0.1] }
+rounds = { integer = [20, 100] }
+batch_size = [256, 512, 1024, 2048]
+learning_rate = { log = [0.0003, 0.03] }
+learning_rate_decay = { uniform = [0.9, 1.0] }
+weight_decay = [0.01]

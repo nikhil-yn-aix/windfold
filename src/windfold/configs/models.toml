@@ -1,0 +1,199 @@
+[no_wake]
+display_name = "no wake"
+representation = "reference"
+blocks = ["turbine_offset"]
+
+[power_curve]
+display_name = "power curve"
+representation = "identity"
+blocks = ["turbine_offset", "turbine_speed_cells"]
+
+[direction_lookup]
+display_name = "direction lookup"
+representation = "identity"
+blocks = ["turbine_offset", "turbine_speed_cells", "turbine_direction_table"]
+
+[cyclic_gam]
+display_name = "cyclic GAM"
+representation = "identity"
+blocks = ["turbine_offset", "turbine_direction_harmonics"]
+
+[identity_linear]
+display_name = "identity linear"
+representation = "identity"
+blocks = ["turbine_offset", "turbine_direction_spline"]
+
+[kernel_linear]
+display_name = "kernel linear"
+representation = "wind_relative"
+blocks = ["turbine_offset", "shared_kernel"]
+
+[identity_gbm]
+display_name = "identity GBM"
+representation = "identity"
+learner = "gbm"
+features = ["turbine", "direction", "reference_speed"]
+seeded = true
+regimes = ["random", "time_blocked", "arc_single", "history"]
+
+[geometry_gbm]
+display_name = "geometry GBM"
+representation = "wind_relative"
+learner = "gbm"
+features = ["wind_frame_geometry", "reference_speed"]
+seeded = true
+regimes = ["random", "time_blocked", "arc_single", "history"]
+
+[physics_guided_gbm]
+display_name = "physics-guided GBM"
+representation = "hybrid"
+learner = "gbm"
+features = ["blockage_ratio", "inverse_blocking_distance", "physics_efficiency", "reference_speed"]
+seeded = true
+regimes = ["random", "time_blocked", "arc_single", "history"]
+
+[peer_automl]
+display_name = "peer AutoML"
+representation = "peer"
+learner = "automl"
+features = ["peer_power", "direction", "reference_speed", "turbine"]
+regimes = ["random", "time_blocked", "arc_single", "history"]
+history_days = [30]
+
+[absolute_graph]
+display_name = "absolute graph"
+representation = "identity"
+learner = "graph"
+edges = "absolute"
+seeded = true
+regimes = ["random", "time_blocked", "arc_single"]
+
+[wind_frame_graph]
+display_name = "wind-frame graph"
+representation = "wind_relative"
+learner = "graph"
+edges = "wind_frame"
+seeded = true
+regimes = ["random", "time_blocked", "arc_single"]
+
+[pretrained_graph]
+base = "wind_frame_graph"
+display_name = "pretrained graph"
+pretrained = true
+regimes = ["arc_single", "history"]
+
+[identity_gbm_inflow]
+base = "identity_gbm"
+display_name = "identity GBM with measured inflow"
+inflow = "measured"
+
+[geometry_gbm_inflow]
+base = "geometry_gbm"
+display_name = "geometry GBM with measured inflow"
+inflow = "measured"
+
+[physics_guided_gbm_inflow]
+base = "physics_guided_gbm"
+display_name = "physics-guided GBM with measured inflow"
+inflow = "measured"
+
+[absolute_graph_inflow]
+base = "absolute_graph"
+display_name = "absolute graph with measured inflow"
+inflow = "measured"
+
+[wind_frame_graph_inflow]
+base = "wind_frame_graph"
+display_name = "wind-frame graph with measured inflow"
+inflow = "measured"
+
+[pywake]
+display_name = "PyWake"
+representation = "physics"
+blocks = ["turbine_offset", "physics"]
+physics_scale = "fixed"
+
+[pywake_discrepancy]
+display_name = "PyWake with discrepancy"
+representation = "hybrid"
+blocks = ["turbine_offset", "physics", "turbine_direction_harmonics"]
+physics_scale = "learned"
+
+[pywake_inflow]
+base = "pywake"
+display_name = "PyWake with measured inflow"
+inflow = "measured"
+
+[pywake_discrepancy_inflow]
+base = "pywake_discrepancy"
+display_name = "PyWake with discrepancy and measured inflow"
+inflow = "measured"
+
+[windfold]
+display_name = "windfold"
+representation = "windfold"
+blocks = ["turbine_offset", "physics", "shared_kernel", "local"]
+physics_scale = "learned"
+inflow = "measured"
+scales = "fixed"
+
+[windfold_no_physics]
+base = "windfold"
+display_name = "windfold without physics"
+drop = ["physics"]
+
+[windfold_no_kernel]
+base = "windfold"
+display_name = "windfold without shared kernel"
+drop = ["shared_kernel"]
+
+[windfold_no_local]
+base = "windfold"
+display_name = "windfold without local term"
+drop = ["local"]
+
+[windfold_permuted_layout]
+base = "windfold"
+display_name = "windfold with permuted layout"
+kernel_layout = "permuted"
+
+[windfold_default_physics]
+base = "windfold"
+display_name = "windfold with default physics"
+physics_parameters = "default"
+
+[windfold_constant_inflow]
+base = "windfold"
+display_name = "windfold with constant inflow"
+inflow = "constant"
+
+[windfold_evidence_scales]
+base = "windfold"
+display_name = "windfold with evidence scales"
+scales = "evidence"
+
+[windfold_constant_inflow_evidence_scales]
+base = "windfold"
+display_name = "windfold with constant inflow and evidence scales"
+inflow = "constant"
+scales = "evidence"
+
+[windfold_average_inflow]
+base = "windfold"
+display_name = "windfold with average inflow"
+inflow = "average"
+
+[windfold_climatology_inflow]
+base = "windfold"
+display_name = "windfold with inflow from sector, speed and month"
+inflow = "climatology"
+
+[windfold_diurnal_inflow]
+base = "windfold"
+display_name = "windfold with inflow from sector, speed, month and time of day"
+inflow = "diurnal"
+
+[windfold_unit_physics]
+base = "windfold"
+display_name = "windfold with the physics weight held at one"
+physics_scale = "fixed"

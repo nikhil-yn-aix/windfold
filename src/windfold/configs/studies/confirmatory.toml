@@ -1,0 +1,5 @@
+name = "confirmatory"
+period = "confirmatory"
+farms = ["penmanshiel"]
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "identity_gbm", "geometry_gbm", "physics_guided_gbm", "peer_automl", "absolute_graph", "wind_frame_graph", "pretrained_graph", "identity_gbm_inflow", "geometry_gbm_inflow", "physics_guided_gbm_inflow", "absolute_graph_inflow", "wind_frame_graph_inflow", "pywake", "pywake_inflow", "pywake_discrepancy", "pywake_discrepancy_inflow", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics", "windfold_constant_inflow", "windfold_evidence_scales", "windfold_constant_inflow_evidence_scales", "windfold_average_inflow", "windfold_climatology_inflow", "windfold_diurnal_inflow", "windfold_unit_physics"]
+sensitivities = ["fixed_shrinkage"]

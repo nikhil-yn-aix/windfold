@@ -1,0 +1,51 @@
+name = "smarteole"
+reader = "smarteole"
+turbine_type = "senvion_mm82"
+
+[dataset]
+doi = "10.5281/zenodo.7342466"
+concept_doi = "10.5281/zenodo.7342465"
+version = "1.0"
+licence = "etalab-2.0"
+citation = "Duc T, Simley E (2022) SMARTEOLE wind farm control open dataset. Zenodo"
+acknowledgement = "The dataset used in this research has been obtained by ENGIE Green in the scope of French national project SMARTEOLE (grant no. ANR-14-CE05-0034)"
+
+[windows]
+development = { start = 2020-02-17T16:30:00Z, end = 2020-05-25T00:00:00Z }
+
+[histories]
+starts = [2020-02-17T16:30:00Z]
+horizons_days = [7, 14, 30, 60]
+test = { start = 2020-04-25T00:00:00Z, end = 2020-05-25T00:00:00Z }
+
+[northing]
+farm_rotation = "none"
+
+[source]
+archives = "SMARTEOLE-WFC-open-dataset.zip"
+turbines = "SMARTEOLE-WFC-open-dataset.zip"
+hub_height_m = 80.0
+
+[channels]
+power_kw = "active_power_{i}_avg"
+speed = "wind_speed_{i}_avg"
+speed_std = "wind_speed_{i}_std"
+wind_direction = "wind_direction_{i}_avg"
+nacelle_position = "nacelle_position_{i}_avg"
+ambient_temperature = "temperature_{i}_avg"
+derated = "derate_{i}"
+
+[rules]
+causal_offsets = false
+fit_power_curve = false
+interval_minutes = 1
+derated = "derated"
+
+[time_blocks]
+folds = 4
+buffer_days = 3
+
+[[raw_files]]
+name = "SMARTEOLE-WFC-open-dataset.zip"
+bytes = 150226596
+md5 = "ffecd4b8cfe3ef3c744a5e0ff4a981c2"

@@ -1,0 +1,13 @@
+name = "smoke"
+period = "development"
+farms = ["smarteole", "kelmarsh", "hill_of_towie", "penmanshiel"]
+models = ["no_wake", "power_curve", "direction_lookup", "cyclic_gam", "identity_linear", "kernel_linear", "identity_gbm", "geometry_gbm", "physics_guided_gbm", "peer_automl", "absolute_graph", "wind_frame_graph", "pretrained_graph", "pywake", "pywake_discrepancy", "windfold", "windfold_no_physics", "windfold_no_kernel", "windfold_no_local", "windfold_permuted_layout", "windfold_default_physics"]
+
+[limits]
+days = 60
+arcs = 2
+histories = 1
+seeds = 1
+replicates = 200
+copies = 2
+automl_minutes = 1

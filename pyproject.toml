@@ -1,0 +1,91 @@
+[project]
+name = "windfold"
+version = "0.1.1"
+description = "wind-farm wake interactions learned from SCADA and tested on wind directions held out from training"
+readme = "README.md"
+authors = [
+    { name = "Nikhil Y N", email = "nikhilylkn@gmail.com" },
+]
+keywords = ["wind energy", "wind farm", "wake", "SCADA", "PyWake", "Gaussian model", "benchmark"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+license = "MIT AND OFL-1.1"
+license-files = ["LICENSE", "src/windfold/report/fonts/LICENSE.txt"]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy>=2.3",
+    "scipy>=1.16",
+    "polars>=2.1",
+    "pyarrow>=21",
+    "py-wake==2.6.20",
+    "h5py>=3.12",
+    "optuna>=4.4",
+    "lightgbm==4.7.0",
+    "scikit-learn>=1.7",
+    "matplotlib>=3.11",
+    "cmcrameri>=1.9",
+    "pydantic>=2.11",
+    "typer>=0.16",
+    "pooch>=1.8",
+    "openpyxl>=3.1",
+    "threadpoolctl>=3.6",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+cpu = ["torch==2.13.0"]
+gpu = ["torch==2.13.0"]
+
+[project.urls]
+Repository = "https://github.com/nikhil-yn-aix/windfold"
+Documentation = "https://github.com/nikhil-yn-aix/windfold/tree/main/docs"
+
+[project.scripts]
+windfold = "windfold.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8.4", "hypothesis>=6.135", "ruff>=0.12", "pyright>=1.1.403"]
+automl = ["autogluon.tabular[all]==1.6.3"]
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv]
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+conflicts = [[{ extra = "cpu" }, { extra = "gpu" }]]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu126", extra = "gpu" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pyright]
+include = ["src", "tests"]
+typeCheckingMode = "basic"
+pythonVersion = "3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --import-mode=importlib"

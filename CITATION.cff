@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: if you use windfold, please cite it as below.
+type: software
+title: "windfold: wind-farm wake interactions learned from SCADA"
+abstract: >-
+  a Gaussian model of each turbine's power relative to its peers that combines calibrated PyWake
+  physics driven by measured turbulence with per-turbine offsets and one learned correction shared
+  by all turbine pairs in wind-aligned coordinates, with a benchmark of 23 models on four open SCADA
+  datasets scored on wind-direction sectors held out from training.
+authors:
+  - given-names: Nikhil
+    family-names: Y N
+    email: nikhilylkn@gmail.com
+    orcid: "https://orcid.org/0009-0004-4300-1844"
+    affiliation: Department of Computer Science and Engineering, M. S. Ramaiah Institute of Technology, Bengaluru, India
+repository-code: https://github.com/nikhil-yn-aix/windfold
+license: MIT
+version: 0.1.1
+doi: 10.5281/zenodo.24441794
+keywords:
+  - wind energy
+  - wind farm
+  - wake
+  - SCADA
+  - PyWake
+  - Gaussian model
+  - benchmark

@@ -1,0 +1,245 @@
+[page]
+widths_mm = [85.0, 170.0]
+text_width_mm = 130.7
+max_height_mm = 225.0
+max_margin_mm = 4.0
+pad_mm = 2.0
+space = 0.06
+clearance_mm = 1.0
+
+[type]
+family = "Inter"
+files = ["Inter-Regular.ttf", "Inter-SemiBold.ttf"]
+size_pt = 8.0
+min_pt = 8.0
+panel_letter_pt = 9.0
+panel_letter_weight = 600
+
+[lines]
+data_pt = 1.25
+axes_pt = 0.6
+min_pt = 0.5
+grid_pt = 0.5
+interval_pt = 1.0
+thin_pt = 0.75
+thick_pt = 2.0
+tick_length_pt = 2.5
+marker_pt = 4.5
+
+[neutrals]
+text = "#1d2127"
+axes = "#4b5059"
+grid = "#e2e5e9"
+context = "#bfc5cc"
+band = "#f1f3f5"
+
+[periods]
+calibration = "#bcc2ca"
+development = "#8d949e"
+confirmatory = "#3b4048"
+
+[files]
+raster_dpi = 300
+
+[tables]
+significant_figures = 3
+
+[colours]
+reference = ["#b7b9bc"]
+identity = ["#b9b4ae"]
+peer = ["#bcb2bf"]
+wind_relative = ["#afb9c6"]
+physics = ["#dc6a00"]
+hybrid = ["#c9bba3"]
+windfold = ["#2552e6"]
+
+[learners.linear]
+marker = "o"
+line = "solid"
+shade = 0
+
+[learners.lookup]
+marker = "s"
+line = "dotted"
+shade = 0
+
+[learners.gbm]
+marker = "^"
+line = "dashed"
+shade = 1
+
+[learners.graph]
+marker = "D"
+line = "dashdot"
+shade = 1
+
+[learners.automl]
+marker = "P"
+line = "dashed"
+shade = 0
+
+[maps]
+magnitude = "batlow"
+signed = "vik"
+direction = "romaO"
+
+[farms]
+order = ["kelmarsh", "penmanshiel", "hill_of_towie", "smarteole"]
+names = { kelmarsh = "Kelmarsh", penmanshiel = "Penmanshiel", hill_of_towie = "Hill of Towie", smarteole = "SMARTEOLE" }
+
+[regimes]
+random = "random"
+time_blocked = "time-blocked"
+arc_single = "held-out sector"
+arc_opposite = "opposite sector"
+arc_control = "control deletion"
+history = "history"
+
+[idea]
+farm = "penmanshiel"
+history_days = 30
+direction_bin_deg = 10.0
+relation_bin_d = 0.5
+
+[turbines]
+senvion_mm92 = "Senvion MM92"
+senvion_mm82 = "Senvion MM82"
+siemens_swt_2_3_82 = "Siemens SWT-2.3-82"
+
+[steps]
+1 = "as read"
+2 = "inside the study windows"
+3 = "operating normally"
+4 = "sensors plausible"
+5 = "close to the power curve"
+6 = "outside documented exclusions"
+7 = "wind direction trusted"
+8 = "free of icing"
+9 = "upwind turbines operating normally"
+10 = "reference speed 5 to 10 m/s"
+11 = "at least 2 valid turbines"
+
+[inputs]
+turbine_offset = "turbine offset"
+turbine_speed_cells = "speed bin per turbine"
+turbine_direction_table = "5° direction table per turbine"
+turbine_direction_harmonics = "direction harmonics per turbine"
+turbine_direction_spline = "direction spline per turbine"
+shared_kernel = "shared wind-frame kernel"
+physics = "calibrated PyWake deficit"
+local = "local site cells"
+turbine = "turbine id"
+direction = "farm direction"
+reference_speed = "reference speed"
+wind_frame_geometry = "wind-frame neighbour geometry"
+blockage_ratio = "blockage ratio"
+inverse_blocking_distance = "inverse blocking distance"
+physics_efficiency = "PyWake efficiency"
+peer_power = "power of the other turbines"
+absolute = "absolute-bearing edges, farm direction"
+wind_frame = "wind-frame edges"
+pretrained = "pretrained on PyWake"
+measured_inflow = "measured free-stream turbulence"
+average_inflow = "free-stream turbulence averaged over the period"
+climatology_inflow = "free-stream turbulence expected for the sector, speed and month"
+diurnal_inflow = "free-stream turbulence expected for the sector, speed, month and time of day"
+
+[knows]
+reference = "nothing about direction"
+identity = "directions and turbines seen in training"
+peer = "the other turbines at the same moment"
+wind_relative = "relations seen anywhere on the farm"
+physics = "the physics alone"
+hybrid = "physics, corrected where data were seen"
+windfold = "physics, shared relations and seen site cells"
+
+[hypotheses]
+validation_misleads = "validation misleads"
+wind_frame_transfers = "wind frame transfers"
+coverage_predicts_failure = "coverage predicts failure"
+early_history_advantage = "early history advantage"
+
+[sensitivities]
+no_direction_calibration = "no direction calibration"
+speed_4_to_12 = "speeds 4 to 12 m/s"
+arc_buffer_0deg = "no sector buffer"
+arc_buffer_10deg = "10° sector buffer"
+arcs_60deg = "60° sectors"
+block_days_1 = "1-day bootstrap blocks"
+block_days_14 = "14-day bootstrap blocks"
+hill_of_towie_after_tune_up = "Hill of Towie after its tune-up"
+kernel_along_20d = "kernel to 20 diameters along"
+kernel_along_40d = "kernel to 40 diameters along"
+kernel_across_2d = "kernel to 2 diameters across"
+fixed_shrinkage = "fixed shrinkage"
+fixed_physics_scale = "physics scale held at 1"
+binned_kernel = "binned kernel"
+
+[failure]
+models = ["identity_gbm", "pywake", "windfold"]
+min_rows = 30
+
+[monitoring]
+models = ["windfold", "cyclic_gam", "identity_gbm", "pywake"]
+drop = 0.05
+
+[margin]
+models = ["pywake", "pywake_inflow", "pywake_discrepancy_inflow"]
+
+[overrides.power_curve]
+marker = "v"
+shade = 1
+
+[overrides.windfold_constant_inflow_evidence_scales]
+label = "windfold, first configuration"
+
+[overrides.windfold_constant_inflow]
+label = "windfold at constant inflow"
+
+[overrides.windfold_default_physics]
+label = "windfold, default physics"
+
+[overrides.windfold_unit_physics]
+label = "windfold, physics weight one"
+
+[overrides.windfold_no_kernel]
+label = "windfold, no shared correction"
+
+[overrides.windfold_no_local]
+label = "windfold, no local cells"
+
+[overrides.windfold_no_physics]
+label = "windfold, no physics"
+
+[overrides.kernel_linear]
+label = "wind-frame linear"
+
+[overrides.geometry_gbm]
+label = "wind-frame GBM"
+
+[overrides.pretrained_graph]
+label = "pretrained wind-frame graph"
+
+[overrides.pywake]
+label = "PyWake at constant inflow"
+
+[overrides.pywake_discrepancy_inflow]
+label = "PyWake with discrepancy at measured inflow"
+
+[overrides.pywake_inflow]
+label = "PyWake at measured inflow"
+
+[overrides.physics_guided_gbm_inflow]
+label = "physics-guided GBM at measured inflow"
+
+[overrides.geometry_gbm_inflow]
+label = "wind-frame GBM at measured inflow"
+
+[overrides.wind_frame_graph_inflow]
+label = "wind-frame graph at measured inflow"
+
+[overrides.identity_gbm_inflow]
+label = "identity GBM at measured inflow"
+
+[overrides.absolute_graph_inflow]
+label = "absolute graph at measured inflow"

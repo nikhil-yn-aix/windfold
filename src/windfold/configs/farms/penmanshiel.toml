@@ -1,0 +1,226 @@
+name = "penmanshiel"
+reader = "greenbyte"
+turbine_type = "senvion_mm82"
+
+[dataset]
+doi = "10.5281/zenodo.16807304"
+concept_doi = "10.5281/zenodo.5946807"
+licence = "CC-BY-4.0"
+citation = "Plumley C, Takeuchi R (2025) Penmanshiel wind farm data. Zenodo"
+acknowledgement = "the record asks users to tell Cubico how the data is used"
+
+[windows]
+calibration = { start = 2016-09-01T00:00:00Z, end = 2017-03-01T00:00:00Z }
+development = { start = 2017-03-01T00:00:00Z, end = 2020-01-01T00:00:00Z }
+confirmatory = { start = 2020-01-01T00:00:00Z, end = 2024-01-01T00:00:00Z }
+
+[histories]
+starts = [2017-04-01T00:00:00Z, 2017-07-01T00:00:00Z, 2017-10-01T00:00:00Z, 2018-01-01T00:00:00Z]
+test = { start = 2019-01-08T00:00:00Z, end = 2020-01-01T00:00:00Z }
+
+[confirmatory_histories]
+starts = [2020-01-01T00:00:00Z, 2020-04-01T00:00:00Z, 2020-07-01T00:00:00Z, 2020-10-15T00:00:00Z]
+test = { start = 2022-01-01T00:00:00Z, end = 2023-01-01T00:00:00Z }
+
+[northing]
+farm_rotation = "wake_dips"
+
+[source]
+archives = "Penmanshiel_SCADA_*.zip"
+turbines = "Penmanshiel_WT_static.csv"
+null_values = ["NaN"]
+speed_missing_codes = [-15.0]
+
+[channels]
+power_kw = "Power (kW)"
+speed = "Wind speed Sensor 2 (m/s)"
+speed_std = "Wind speed Sensor 2, Standard deviation (m/s)"
+wind_direction = "Wind direction (°)"
+nacelle_position = "Nacelle position (°)"
+ambient_temperature = "Nacelle ambient temperature (°C)"
+speed_min = "Wind speed Sensor 2, Minimum (m/s)"
+power_setpoint_kw = "Turbine Power setpoint (kW)"
+power_setpoint_min_kw = "Turbine Power setpoint, Min (kW)"
+time_based_availability = "Time-based System Avail."
+downtime_loss_kwh = "Lost Production to Downtime (kWh)"
+
+[rules]
+fit_power_curve = false
+availability = "time_based_availability"
+downtime_loss = "downtime_loss_kwh"
+setpoints = ["power_setpoint_min_kw", "power_setpoint_kw"]
+
+[rules.status_kinds]
+Stop = "stop"
+Curtailment = "curtailment"
+Communication = "unknown"
+
+[[rules.message_kinds]]
+status = "Warning"
+message = "P output externally reduced"
+kind = "derate"
+
+[[rules.message_kinds]]
+status = "Warning"
+message = "Reduced power converter"
+kind = "derate"
+
+[[rules.message_kinds]]
+status = "Warning"
+message = "Reduced power gearbox"
+kind = "derate"
+
+[[rules.message_kinds]]
+status = "Warning"
+message = "Reduced power transformer"
+kind = "derate"
+
+[[rules.message_kinds]]
+status = "Informational"
+message = "Parameterized P red."
+kind = "derate"
+
+[[rules.message_kinds]]
+status = "Informational"
+message = "High frequency - P reduction"
+kind = "derate"
+
+[[rules.message_kinds]]
+status = "Informational"
+message = "Parameterized speed red."
+kind = "derate"
+
+[[rules.message_kinds]]
+status = "Stop"
+message = "Icing (anemometer)"
+kind = "icing"
+
+[[rules.message_kinds]]
+status = "Stop"
+message = "Icing (stop)"
+kind = "icing"
+
+[[rules.message_kinds]]
+status = "Warning"
+message = "Icing (dev. electr. power)"
+kind = "icing"
+
+[[rules.message_kinds]]
+status = "Informational"
+message = "Reset of icing st. cd. possible"
+kind = "icing"
+
+[[rules.message_kinds]]
+status = "Informational"
+message = "Manual yaw"
+kind = "manual_yaw"
+
+[[raw_files]]
+name = "Penmanshiel_28.7MW_14xSenvion_MM82.kmz"
+bytes = 21054
+md5 = "a6743bdbda025e3279ecab38937c3069"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2016_WT01-10_3107.zip"
+bytes = 128926241
+md5 = "3819e1b2168b84da195b64e1e9d78b03"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2016_WT11-15_3107.zip"
+bytes = 55917173
+md5 = "92c30453d43a38e985af3e2e305eedd4"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2017_WT01-10_3114.zip"
+bytes = 273531678
+md5 = "c8279e34a5e33d688e2219aa9abab74e"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2017_WT11-15_3115.zip"
+bytes = 152896438
+md5 = "d41874e3d195e88506949492b5758cf6"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2018_WT01-10_3113.zip"
+bytes = 365016408
+md5 = "6389e5c4ea59d6565f6712db43a504ce"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2018_WT11-15_3116.zip"
+bytes = 204798983
+md5 = "7c40dc00df6d6301427213e15170b927"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2019_WT01-10_3112.zip"
+bytes = 473518587
+md5 = "78389603cb4ae20a6a9b878f5a84bc7b"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2019_WT11-15_3117.zip"
+bytes = 265354191
+md5 = "92747a976716c5f35d9ee6462958fd7a"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2020_WT01-10_3109.zip"
+bytes = 694483651
+md5 = "46f679f2e4ab3d69c04b31c8dc625106"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2020_WT11-15_3118.zip"
+bytes = 389300869
+md5 = "c73323f21451c08247dbdb5d1a1434a9"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2021_WT01-10_4460.zip"
+bytes = 749666360
+md5 = "7a0839cf3cd5e7044d6ab814fef3c43f"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2021_WT11-15_4461.zip"
+bytes = 418617876
+md5 = "f5804b90089ce4d50dc5117fda6f675c"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2022_WT01-10_4462.zip"
+bytes = 710776645
+md5 = "91351469cdeb3ca95be1a0414dcfec8f"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2022_WT11-15_4463.zip"
+bytes = 396724464
+md5 = "5f4743133a9cf65ad33de139b43f96b4"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2023_02_WT_01-10_5981.zip"
+bytes = 63977489
+md5 = "05ac6e90b516fa30db05dfe6361099a7"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2023_03_WT_01-10_5982.zip"
+bytes = 68784330
+md5 = "6fae49a3603dd2a503126e5e518eaf55"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2023_Q2_WT_01-10_5977.zip"
+bytes = 205040452
+md5 = "7ed1d095183469e399054695b8c4fb5e"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2023_Q3 Q4_WT_01-10_5973.zip"
+bytes = 452196453
+md5 = "f201240d4072dd4a5a8492725eb49787"
+
+[[raw_files]]
+name = "Penmanshiel_SCADA_2023_WT_11-15_5964.zip"
+bytes = 633272988
+md5 = "813ad4635cf50b9d96b253ee53175086"
+
+[[raw_files]]
+name = "Penmanshiel_WT_dataSignalMapping.xlsx"
+bytes = 19359
+md5 = "2eae1b84a014619268a6e4f53e6b1c91"
+
+[[raw_files]]
+name = "Penmanshiel_WT_static.csv"
+bytes = 2029
+md5 = "c4cd4191234c1a67a391fe5d2978256b"

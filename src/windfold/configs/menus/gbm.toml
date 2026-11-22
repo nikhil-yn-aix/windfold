@@ -1,0 +1,392 @@
+seed = 20261116
+size = 30
+
+[[configuration]]
+index = 0
+num_boost_round = 1000
+learning_rate = 0.0261989
+num_leaves = 15
+min_data_in_leaf = 500
+feature_fraction = 0.696719
+bagging_fraction = 0.694657
+bagging_freq = 1
+lambda_l2 = 0.00332278
+min_data_per_group = 10
+cat_smooth = 49.5637
+
+[[configuration]]
+index = 1
+num_boost_round = 1000
+learning_rate = 0.0142506
+num_leaves = 15
+min_data_in_leaf = 20
+feature_fraction = 0.568812
+bagging_fraction = 0.560772
+bagging_freq = 1
+lambda_l2 = 0.00741238
+min_data_per_group = 50
+cat_smooth = 41.9358
+
+[[configuration]]
+index = 2
+num_boost_round = 1000
+learning_rate = 0.0912417
+num_leaves = 127
+min_data_in_leaf = 20
+feature_fraction = 0.713541
+bagging_fraction = 0.537833
+bagging_freq = 1
+lambda_l2 = 0.764015
+min_data_per_group = 200
+cat_smooth = 3.7334
+
+[[configuration]]
+index = 3
+num_boost_round = 500
+learning_rate = 0.0780732
+num_leaves = 15
+min_data_in_leaf = 100
+feature_fraction = 0.949678
+bagging_fraction = 0.812222
+bagging_freq = 1
+lambda_l2 = 0.258183
+min_data_per_group = 200
+cat_smooth = 49.375
+
+[[configuration]]
+index = 4
+num_boost_round = 1500
+learning_rate = 0.0575506
+num_leaves = 31
+min_data_in_leaf = 100
+feature_fraction = 0.613576
+bagging_fraction = 0.720145
+bagging_freq = 1
+lambda_l2 = 3.2087
+min_data_per_group = 10
+cat_smooth = 1.65237
+
+[[configuration]]
+index = 5
+num_boost_round = 500
+learning_rate = 0.0221306
+num_leaves = 15
+min_data_in_leaf = 200
+feature_fraction = 0.884848
+bagging_fraction = 0.836205
+bagging_freq = 1
+lambda_l2 = 5.2638
+min_data_per_group = 100
+cat_smooth = 73.383
+
+[[configuration]]
+index = 6
+num_boost_round = 1000
+learning_rate = 0.0499043
+num_leaves = 15
+min_data_in_leaf = 200
+feature_fraction = 0.971637
+bagging_fraction = 0.882188
+bagging_freq = 1
+lambda_l2 = 0.0279353
+min_data_per_group = 10
+cat_smooth = 1.62668
+
+[[configuration]]
+index = 7
+num_boost_round = 500
+learning_rate = 0.0827793
+num_leaves = 15
+min_data_in_leaf = 500
+feature_fraction = 0.519586
+bagging_fraction = 0.565073
+bagging_freq = 1
+lambda_l2 = 5.99421
+min_data_per_group = 100
+cat_smooth = 1.38204
+
+[[configuration]]
+index = 8
+num_boost_round = 1000
+learning_rate = 0.0123655
+num_leaves = 127
+min_data_in_leaf = 20
+feature_fraction = 0.69683
+bagging_fraction = 0.779979
+bagging_freq = 1
+lambda_l2 = 0.0442645
+min_data_per_group = 200
+cat_smooth = 6.17277
+
+[[configuration]]
+index = 9
+num_boost_round = 1500
+learning_rate = 0.0156232
+num_leaves = 127
+min_data_in_leaf = 20
+feature_fraction = 0.674118
+bagging_fraction = 0.944003
+bagging_freq = 1
+lambda_l2 = 0.153615
+min_data_per_group = 50
+cat_smooth = 1.16794
+
+[[configuration]]
+index = 10
+num_boost_round = 1500
+learning_rate = 0.0660291
+num_leaves = 127
+min_data_in_leaf = 100
+feature_fraction = 0.66148
+bagging_fraction = 0.602036
+bagging_freq = 1
+lambda_l2 = 0.349963
+min_data_per_group = 10
+cat_smooth = 1.60695
+
+[[configuration]]
+index = 11
+num_boost_round = 500
+learning_rate = 0.0159695
+num_leaves = 63
+min_data_in_leaf = 500
+feature_fraction = 0.80603
+bagging_fraction = 0.913116
+bagging_freq = 1
+lambda_l2 = 0.0101252
+min_data_per_group = 50
+cat_smooth = 39.7302
+
+[[configuration]]
+index = 12
+num_boost_round = 1000
+learning_rate = 0.0173328
+num_leaves = 31
+min_data_in_leaf = 200
+feature_fraction = 0.54794
+bagging_fraction = 0.987846
+bagging_freq = 1
+lambda_l2 = 2.08307
+min_data_per_group = 10
+cat_smooth = 20.9079
+
+[[configuration]]
+index = 13
+num_boost_round = 2000
+learning_rate = 0.0571451
+num_leaves = 63
+min_data_in_leaf = 100
+feature_fraction = 0.603433
+bagging_fraction = 0.901928
+bagging_freq = 1
+lambda_l2 = 0.162883
+min_data_per_group = 50
+cat_smooth = 6.17708
+
+[[configuration]]
+index = 14
+num_boost_round = 1500
+learning_rate = 0.0144837
+num_leaves = 127
+min_data_in_leaf = 200
+feature_fraction = 0.881653
+bagging_fraction = 0.791577
+bagging_freq = 1
+lambda_l2 = 0.0352069
+min_data_per_group = 10
+cat_smooth = 38.7472
+
+[[configuration]]
+index = 15
+num_boost_round = 2000
+learning_rate = 0.0113773
+num_leaves = 63
+min_data_in_leaf = 20
+feature_fraction = 0.561568
+bagging_fraction = 0.677312
+bagging_freq = 1
+lambda_l2 = 5.76253
+min_data_per_group = 100
+cat_smooth = 6.14341
+
+[[configuration]]
+index = 16
+num_boost_round = 1000
+learning_rate = 0.0237437
+num_leaves = 15
+min_data_in_leaf = 100
+feature_fraction = 0.55526
+bagging_fraction = 0.979428
+bagging_freq = 1
+lambda_l2 = 0.00168058
+min_data_per_group = 50
+cat_smooth = 2.80547
+
+[[configuration]]
+index = 17
+num_boost_round = 1000
+learning_rate = 0.0437952
+num_leaves = 127
+min_data_in_leaf = 200
+feature_fraction = 0.763684
+bagging_fraction = 0.920448
+bagging_freq = 1
+lambda_l2 = 0.00125638
+min_data_per_group = 100
+cat_smooth = 11.1021
+
+[[configuration]]
+index = 18
+num_boost_round = 500
+learning_rate = 0.0178976
+num_leaves = 31
+min_data_in_leaf = 500
+feature_fraction = 0.940553
+bagging_fraction = 0.653005
+bagging_freq = 1
+lambda_l2 = 0.0287686
+min_data_per_group = 100
+cat_smooth = 36.6586
+
+[[configuration]]
+index = 19
+num_boost_round = 2000
+learning_rate = 0.0220577
+num_leaves = 127
+min_data_in_leaf = 500
+feature_fraction = 0.855335
+bagging_fraction = 0.737126
+bagging_freq = 1
+lambda_l2 = 1.25431
+min_data_per_group = 100
+cat_smooth = 3.36903
+
+[[configuration]]
+index = 20
+num_boost_round = 500
+learning_rate = 0.0125727
+num_leaves = 15
+min_data_in_leaf = 50
+feature_fraction = 0.598867
+bagging_fraction = 0.538212
+bagging_freq = 1
+lambda_l2 = 0.00275848
+min_data_per_group = 100
+cat_smooth = 22.3945
+
+[[configuration]]
+index = 21
+num_boost_round = 2000
+learning_rate = 0.0233971
+num_leaves = 127
+min_data_in_leaf = 50
+feature_fraction = 0.636373
+bagging_fraction = 0.74832
+bagging_freq = 1
+lambda_l2 = 0.517352
+min_data_per_group = 200
+cat_smooth = 3.70797
+
+[[configuration]]
+index = 22
+num_boost_round = 1000
+learning_rate = 0.0958619
+num_leaves = 63
+min_data_in_leaf = 100
+feature_fraction = 0.554344
+bagging_fraction = 0.897956
+bagging_freq = 1
+lambda_l2 = 0.0464755
+min_data_per_group = 200
+cat_smooth = 5.63259
+
+[[configuration]]
+index = 23
+num_boost_round = 1000
+learning_rate = 0.0266768
+num_leaves = 127
+min_data_in_leaf = 100
+feature_fraction = 0.540334
+bagging_fraction = 0.867051
+bagging_freq = 1
+lambda_l2 = 0.16983
+min_data_per_group = 200
+cat_smooth = 80.9933
+
+[[configuration]]
+index = 24
+num_boost_round = 500
+learning_rate = 0.0566934
+num_leaves = 15
+min_data_in_leaf = 100
+feature_fraction = 0.722121
+bagging_fraction = 0.924822
+bagging_freq = 1
+lambda_l2 = 0.422774
+min_data_per_group = 50
+cat_smooth = 4.52294
+
+[[configuration]]
+index = 25
+num_boost_round = 2000
+learning_rate = 0.0726222
+num_leaves = 127
+min_data_in_leaf = 500
+feature_fraction = 0.750097
+bagging_fraction = 0.991144
+bagging_freq = 1
+lambda_l2 = 0.957537
+min_data_per_group = 100
+cat_smooth = 1.77555
+
+[[configuration]]
+index = 26
+num_boost_round = 1500
+learning_rate = 0.0120639
+num_leaves = 15
+min_data_in_leaf = 500
+feature_fraction = 0.940875
+bagging_fraction = 0.70059
+bagging_freq = 1
+lambda_l2 = 0.233706
+min_data_per_group = 200
+cat_smooth = 32.1253
+
+[[configuration]]
+index = 27
+num_boost_round = 1000
+learning_rate = 0.0264784
+num_leaves = 127
+min_data_in_leaf = 50
+feature_fraction = 0.87194
+bagging_fraction = 0.968014
+bagging_freq = 1
+lambda_l2 = 0.00952046
+min_data_per_group = 50
+cat_smooth = 6.08632
+
+[[configuration]]
+index = 28
+num_boost_round = 1000
+learning_rate = 0.0525037
+num_leaves = 63
+min_data_in_leaf = 500
+feature_fraction = 0.73554
+bagging_fraction = 0.675902
+bagging_freq = 1
+lambda_l2 = 0.585201
+min_data_per_group = 50
+cat_smooth = 1.22945
+
+[[configuration]]
+index = 29
+num_boost_round = 2000
+learning_rate = 0.0382306
+num_leaves = 127
+min_data_in_leaf = 20
+feature_fraction = 0.94596
+bagging_fraction = 0.738964
+bagging_freq = 1
+lambda_l2 = 1.0792
+min_data_per_group = 100
+cat_smooth = 50.3262
